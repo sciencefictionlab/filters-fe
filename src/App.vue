@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div  id="app">
-
-    </div>
-     <router-view />
+    <div id="app"></div>
+    <router-view />
   </div>
 </template>
 
@@ -15,5 +13,4 @@
   text-align: center;
   color: #2c3e50;
 }
-
 </style>
