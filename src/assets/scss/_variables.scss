@@ -1,0 +1,17 @@
+// Import Bulma's core
+@import "../../../node_modules/bulma/sass/utilities/all";
+
+// Set your colors
+$primary: #d6737b;
+$primary-light: #eed7ff;
+//$primary-dark: #52057b;
+$primary-dark: #380252;
+$bg-dark: #040d21;
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+$text-light: #737373;
+$success-light: #d4f2df;
+$warning-light: #f7ebbb;
+$black: #000;
+$white: #fff;
