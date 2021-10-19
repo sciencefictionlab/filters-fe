@@ -75,9 +75,18 @@ export default {
   },
   methods: {
     makeBgGray() {
+      if (Object.keys(this.$data.file).length === 0){
+        this.$buefy.snackbar.open({
+          message: 'Please upload an image first!',
+          type: 'is-warning',
+          position: 'is-top',
+          actionText: 'Okay'
+        })
+        return
+      }
+
       let formData = new FormData();
       formData.append("image", this.$data.file);
-      console.log(formData)
       this.$data.isLoading = true;
       _axios
         .post(process.env.VUE_APP_API_URL + "/image/upload/bg-gray", formData, {
@@ -96,9 +105,19 @@ export default {
 
 
     makeBgWhiteColor(){
+
+      if (Object.keys(this.$data.file).length === 0){
+        this.$buefy.snackbar.open({
+          message: 'Please upload an image first!',
+          type: 'is-warning',
+          position: 'is-top',
+          actionText: 'Okay'
+        })
+        return
+      }
+
       let formData = new FormData();
       formData.append("image", this.$data.file);
-
       this.$data.isLoading = true;
       _axios
         .post(process.env.VUE_APP_API_URL + "/image/upload/bg-color-white", formData, {
