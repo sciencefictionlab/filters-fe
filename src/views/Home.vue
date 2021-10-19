@@ -11,24 +11,27 @@
 
     <section class="section has-text-centered">
       <div class="columns" style="margin-top: 5rem">
-        <div class="column is-4">
+        <div class="column is-4 ">
           <div class="box bx-style" >
             <b-field>
-              <b-upload v-model="file" style="cursor: pointer" @input="uploadFileAndSend">
-                <section class="section">
-                  <div class="content has-text-centered">
-                    <p id="file">
-                      <b-icon icon="upload" size="is-large"></b-icon>
-                      {{ file.name }}
-                    </p>
-                    <h5>Drop your files here or click to upload <br> <br>
-                      <span class="tag is-primary">Make background gray</span>
-                    </h5>
-                  </div>
-                </section>
+              <b-upload v-model="file">
+                <div class="content has-text-centered has-cursor-pointer">
+                  <p>
+                    <b-icon icon="upload" size="is-large"></b-icon>
+                    {{ file.name }}
+                  </p>
+                  <h5>Drop your files here or click to upload</h5>
+                </div>
               </b-upload>
             </b-field>
           </div>
+
+          <span>
+              <span class="tag is-primary mr-1 has-cursor-pointer" @click="makeBgGray">Make background gray</span>
+
+              <span class="tag is-primary has-cursor-pointer" @click="makeBgWhiteColor">Make background white</span>
+           </span>
+
         </div>
 
         <div class="column">
@@ -71,13 +74,34 @@ export default {
     };
   },
   methods: {
-    uploadFileAndSend() {
+    makeBgGray() {
+      let formData = new FormData();
+      formData.append("image", this.$data.file);
+      console.log(formData)
+      this.$data.isLoading = true;
+      _axios
+        .post(process.env.VUE_APP_API_URL + "/image/upload/bg-gray", formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        .then((response) => {
+          this.$data.converted_image_url = response.data.url;
+          this.$data.isLoading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log(error.response.data);
+          this.$data.isLoading = false;
+        });
+    },
+
+
+    makeBgWhiteColor(){
       let formData = new FormData();
       formData.append("image", this.$data.file);
 
       this.$data.isLoading = true;
       _axios
-        .post(process.env.VUE_APP_API_URL + "/image/upload", formData, {
+        .post(process.env.VUE_APP_API_URL + "/image/upload/bg-color-white", formData, {
           headers: { "Content-Type": "multipart/form-data" }
         })
         .then((response) => {
@@ -101,7 +125,8 @@ export default {
 
 .bx-style{
  border: 2px solid $primary;
-  background-color:#ebd1d163
+  background-color:#ebd1d163;
+
 }
 
 </style>
