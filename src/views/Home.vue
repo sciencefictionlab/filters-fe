@@ -29,7 +29,7 @@
         <img
           v-bind:src="converted_image_url"
           alt=""
-          style="width: 20rem; height: 20rem"
+          style="height: 20rem"
         />
 
         <br /><br />
@@ -73,8 +73,8 @@ export default {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((response) => {
-          this.$data.isLoading = false;
           this.$data.converted_image_url = response.data.url;
+          this.$data.isLoading = false;
         })
         .catch((error) => {
           console.log(error);
