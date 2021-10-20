@@ -1,5 +1,6 @@
 @import "../../../node_modules/bulma";
 @import "../../../node_modules/buefy/src/scss/buefy";
+@import "variables";
 
 html {
   background-color: #e9e9e9;
@@ -12,4 +13,27 @@ html {
 .section {
   padding-left: 7rem;
   padding-right: 7rem;
+}
+
+.button.is-primary{
+  background-color: $primary
+}
+
+.tag:not(body).is-primary {
+  background-color: $primary;
+}
+
+
+.button.is-primary:hover, .button.is-primary.is-hovered {
+  background-color: $primary;
+}
+
+.span.is-primary:hover, .button.is-primary.is-hovered {
+  background-color: $primary;
+}
+
+
+.hero.is-primary {
+  background-color: $primary;
+  color: #fff;
 }
