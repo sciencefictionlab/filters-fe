@@ -74,16 +74,21 @@ export default {
     };
   },
   methods: {
-    makeBgGray() {
-      if (Object.keys(this.$data.file).length === 0){
+    _isFileEmpty(){
+      if (!this.$data.file.name && !this.$data.file.size){
         this.$buefy.snackbar.open({
           message: 'Please upload an image first!',
           type: 'is-warning',
           position: 'is-top',
           actionText: 'Okay'
         })
-        return
+        return true
       }
+      return false
+    },
+    makeBgGray() {
+
+      if(this._isFileEmpty()) return
 
       let formData = new FormData();
       formData.append("image", this.$data.file);
@@ -106,15 +111,7 @@ export default {
 
     makeBgWhiteColor(){
 
-      if (Object.keys(this.$data.file).length === 0){
-        this.$buefy.snackbar.open({
-          message: 'Please upload an image first!',
-          type: 'is-warning',
-          position: 'is-top',
-          actionText: 'Okay'
-        })
-        return
-      }
+      if(this._isFileEmpty()) return
 
       let formData = new FormData();
       formData.append("image", this.$data.file);
